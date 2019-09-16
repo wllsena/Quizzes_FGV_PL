@@ -56,7 +56,7 @@ class Test:
                 with test_timeout(self.time):
                     output = getattr(module, self.func)(t)
             except:
-                output = "ERRO"
+                output = "ERROR"
             outputs[i] = output
 
         if not self.mutable:
@@ -105,12 +105,12 @@ class report:
                 expected = test.solved
                 final_grade[0] += grade[k]
                 final_grade[1] += test.value
-                report += "   Questao: {}, Nota: {}/{}\n".format(k+1, grade[k], test.value)
+                report += "   Questao: {}, Nota: {:0.4f}/{}\n".format(k+1, grade[k], test.value)
                 for j in range(test.amount):
                     report += "      {}({}) = {}\n".format(test.func, test.tests[j], expected[j])
                     report += "         valor dado: {}\n\n".format(output[j])
 
-            self.reports[i] = "Quiz: {}, Aluno: {}, Notal final: {}/{}\n".format(
+            self.reports[i] = "Quiz: {}, Aluno: {}, Notal final: {:0.2f}/{}\n".format(
                 num_quiz, names[i], final_grade[0], final_grade[1]) + report
 
     def write_reports(self):
