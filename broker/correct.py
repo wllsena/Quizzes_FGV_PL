@@ -110,7 +110,7 @@ class report:
                     report += "      {}({}) = {}\n".format(test.func, test.tests[j], expected[j])
                     report += "         valor dado: {}\n\n".format(output[j])
 
-            self.reports[i] = "Quiz: {}, Aluno: {}, Notal final: {:0.2f}/{}\n".format(
+            self.reports[i] = "Quiz: {}, Aluno: {}, Notal final: {:0.2f}/{:0.2f}\n".format(
                 num_quiz, names[i], final_grade[0], final_grade[1]) + report
 
     def write_reports(self):

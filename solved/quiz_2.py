@@ -8,7 +8,11 @@ Ex: quantidade(576.73) -> 15 (5 de 100.00, 1 de 50.00, 1 de 20.00, 1 de 5.00, 1 
     quantidade(4.00) -> 2 (2 de 2.00)
 """
 def quantidade(valor):
-    return 0
+    quantidade = 0 
+    for nota in [100.00, 50.00, 20.00, 10.00, 5.00, 2.00, 1.00, 0.50, 0.25, 0.10, 0.5, 0.01]:
+        quantidade += valor // nota
+        valor       = valor % nota
+    return int(quantidade)
 
 """
 A classe bola representa uma esfera cheia de agua (com peso 1000g por metro cubico) com um raio r 
@@ -21,12 +25,15 @@ Ex: bola((2, "vermelho")).peso() -> 33.66012533333334
     bola((3, "azul")).peso()     -> 113.20709400000001
 """
 class bola:
-    pi = 3.1415
-    def __init__(self, rcor):
-        pass
+    pi = 3.14159
+    
+    def __init__(self, p):
+        self.r, self.cor = p
+        self.peso_cor = {"azul":0.001, "amarelo":0.002, "vermelho":0.003}[self.cor]
+        self.pesof    = (4/3)*self.pi*(self.r**3) + self.peso_cor*4*self.pi*(self.r**2)
         
     def peso(self):
-        return 0
+        return self.pesof
 """
 Dado um array (numpy) n x m com n >= 3 e m >= 3, qualquer A[i,j] != 0,
 a funcao borda deve tornar a soma de todos os valores
@@ -42,4 +49,6 @@ Ex: borda(np.array([[1, 2, 3, 4],
                     [2, 2, 2]]))
 """
 def borda(array):
-    return 0
+    centro = array[1:-1, 1:-1].copy()
+    array[1:-1, 1:-1] = 0
+    return array.sum()/centro.prod()
